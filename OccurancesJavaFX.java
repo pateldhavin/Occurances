@@ -20,13 +20,24 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
-//GUI Using javaFX
+
+/**This is an application that counts occurances of words in the poem, "The Raven".
+ * @author Dhavin Patel
+ *@version 1.2  Created on Nov 3, 2022
+ */
 
 
 public class OccurancesJavaFX extends Application {
 
+	
+	/**
+	 * String used during GUI creation
+	 */
 	public static final String BLANK = "";
 
+	/**
+	 * Variables for GUI exportation of occurances results
+	 */
 	GridPane grid;
 	Label wordLabel, countLabel;
 	TextField wordField, countField;
@@ -34,6 +45,8 @@ public class OccurancesJavaFX extends Application {
 
 	Map<String, Integer> map = new HashMap<String, Integer>();
 
+	
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 
@@ -83,11 +96,17 @@ public class OccurancesJavaFX extends Application {
 		stage.show();
 	}
 
-	private void wordsMap() throws Exception {
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+	
+	String wordsMap() throws Exception {
 
 		String line;
-
-		//path to text file
+/**
+*path to text file
+*/
 		BufferedReader bufferedReader = new BufferedReader(new FileReader("C:/Users/dgato/OneDrive/Desktop/The Raven.txt"));
 
 		while ((line = bufferedReader.readLine()) != null) {
@@ -103,7 +122,9 @@ public class OccurancesJavaFX extends Application {
 		}
 		
 		
-	//sort the list
+	/**
+	 * sort the list
+	 */
 		Set<Map.Entry<String, Integer>> sortedWordcounts = map.entrySet();
 		List<Map.Entry<String, Integer>> sortedList = new ArrayList<Map.Entry<String, Integer>>(sortedWordcounts);
 		Collections.sort(sortedList, new Comparator<Map.Entry<String, Integer>>() {
@@ -112,7 +133,9 @@ public class OccurancesJavaFX extends Application {
 			}
 		});
 
-		//output results
+		/**
+		 * output results
+		 */
 		System.out.printf("%-20s%15s\n", "Word From Poem", "Frequency");
 
 		System.out.printf("%-20s%15s\n", "--------------", "---------");
@@ -121,11 +144,18 @@ public class OccurancesJavaFX extends Application {
 		}
 
 		bufferedReader.close();
+		return line;
 
 	}
-
+	
+		
 	
 	
+	/**
+	 * @param title Title of alert
+	 * @param message Alert message that is displayed
+	 * @param alertType The type of alert
+	 */
 	public void alert(String title, String message, AlertType alertType) {
 		Alert alert = new Alert(alertType);
 		alert.setTitle(title);
@@ -134,6 +164,10 @@ public class OccurancesJavaFX extends Application {
 		alert.showAndWait();
 	}
 
+	
+	/**The main method of this application.
+	 * @param args Array of string arguments.
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
